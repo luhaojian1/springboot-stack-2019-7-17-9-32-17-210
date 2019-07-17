@@ -10,13 +10,10 @@ public class CrimeConstitution {
     private int id;
 
     @Column(nullable = false)
-    private String subjectiveElement;
-
-    @Column(nullable = false)
     private String objectiveElement;
 
-    @OneToOne(mappedBy = "crimeConstitution")
-    private Case crimeCase;
+    @Column(nullable = false)
+    private long subjectiveElement;
 
     public int getId() {
         return id;
@@ -26,14 +23,6 @@ public class CrimeConstitution {
         this.id = id;
     }
 
-    public String getSubjectiveElement() {
-        return subjectiveElement;
-    }
-
-    public void setSubjectiveElement(String subjectiveElement) {
-        this.subjectiveElement = subjectiveElement;
-    }
-
     public String getObjectiveElement() {
         return objectiveElement;
     }
@@ -41,5 +30,12 @@ public class CrimeConstitution {
     public void setObjectiveElement(String objectiveElement) {
         this.objectiveElement = objectiveElement;
     }
-}
 
+    public long getSubjectiveElement() {
+        return subjectiveElement;
+    }
+
+    public void setSubjectiveElement(long subjectiveElement) {
+        this.subjectiveElement = subjectiveElement;
+    }
+}

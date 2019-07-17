@@ -16,8 +16,9 @@ public class Case {
     private long occurrenceTime;
 
     @OneToOne
-    @JoinColumn(name = "case_id" ,referencedColumnName = "id")
+    @JoinColumn(name = "case_id")
     private CrimeConstitution crimeConstitution;
+
 
     public int getCaseId() {
         return caseId;
