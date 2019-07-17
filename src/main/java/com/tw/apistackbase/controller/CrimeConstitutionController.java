@@ -1,12 +1,12 @@
 package com.tw.apistackbase.controller;
 
-import com.tw.apistackbase.module.Case;
 import com.tw.apistackbase.module.CrimeConstitution;
 import com.tw.apistackbase.service.CrimeConstitutionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class CrimeConstitutionController {
@@ -16,5 +16,16 @@ public class CrimeConstitutionController {
     public CrimeConstitution createCrimeConstitution(@RequestBody CrimeConstitution crimeConstitution){
         return crimeConstitutionService.createCrimeConstitution(crimeConstitution);
     }
+
+    @GetMapping("/crimeConstitutions")
+    public List<CrimeConstitution> findAllCrimeConstitution(){
+        return crimeConstitutionService.findAllCrimeConstitution();
+    }
+
+    @GetMapping("/crimeConstitutions/{crimeConstitutionId}")
+    public Optional<CrimeConstitution> findCrimeConstitutionById(@PathVariable int crimeConstitutionId){
+        return crimeConstitutionService.findById(crimeConstitutionId);
+    }
+
 
 }

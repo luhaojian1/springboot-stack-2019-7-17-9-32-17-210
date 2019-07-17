@@ -15,6 +15,9 @@ public class CrimeConstitution {
     @Column(nullable = false)
     private String objectiveElement;
 
+    @OneToOne(mappedBy = "crimeConstitution")
+    private Case crimeCase;
+
     public int getId() {
         return id;
     }
