@@ -15,6 +15,9 @@ public class Case {
     @Column(nullable = false)
     private long occurrenceTime;
 
+    @OneToOne
+    @JoinColumn(name = "caseId")
+    private CrimeConstitution crimeConstitution;
 
     public int getCaseId() {
         return caseId;
@@ -38,5 +41,13 @@ public class Case {
 
     public void setOccurrenceTime(long occurrenceTime) {
         this.occurrenceTime = occurrenceTime;
+    }
+
+    public CrimeConstitution getCrimeConstitution() {
+        return crimeConstitution;
+    }
+
+    public void setCrimeConstitution(CrimeConstitution crimeConstitution) {
+        this.crimeConstitution = crimeConstitution;
     }
 }
