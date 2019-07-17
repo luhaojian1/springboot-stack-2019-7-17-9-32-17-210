@@ -28,4 +28,9 @@ public class CaseController {
         return caseService.findById(caseId);
     }
 
+    @GetMapping(value = "/cases",params = "caseName")
+    public List<Case> findByCaseName(@RequestParam String caseName){
+        return caseService.findByCaseName(caseName);
+    }
+
 }

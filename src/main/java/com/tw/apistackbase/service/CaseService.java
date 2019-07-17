@@ -27,4 +27,8 @@ public class CaseService {
     public Optional<Case> findById(int caseId) {
         return caseRepository.findById(caseId);
     }
+
+    public List<Case> findByCaseName(String caseName) {
+        return caseRepository.findByCaseName(caseName);
+    }
 }
