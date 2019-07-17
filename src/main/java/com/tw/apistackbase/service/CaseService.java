@@ -31,4 +31,8 @@ public class CaseService {
     public List<Case> findByCaseName(String caseName) {
         return caseRepository.findByCaseName(caseName);
     }
+
+    public void deleteById(int caseId) {
+        caseRepository.deleteById(caseId);
+    }
 }

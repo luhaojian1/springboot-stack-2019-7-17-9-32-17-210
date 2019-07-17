@@ -33,4 +33,9 @@ public class CaseController {
         return caseService.findByCaseName(caseName);
     }
 
+    @DeleteMapping(value = "/cases/{caseId}")
+    public void deleteByCaseId(@PathVariable int caseId){
+        caseService.deleteById(caseId);
+    }
+
 }
