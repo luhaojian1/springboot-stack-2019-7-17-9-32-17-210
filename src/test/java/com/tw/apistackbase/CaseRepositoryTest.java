@@ -4,7 +4,6 @@ import com.tw.apistackbase.module.Case;
 import com.tw.apistackbase.module.CrimeConstitution;
 import com.tw.apistackbase.repository.CaseRepository;
 import com.tw.apistackbase.repository.CrimeConstitutionRepository;
-import com.tw.apistackbase.service.CaseService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +23,7 @@ public class CaseRepositoryTest {
     private CrimeConstitutionRepository crimeConstitutionRepository;
 
     @Test
-    public void should_save_and_find_case(){
+    public void should_save_and_find_case() {
 
         Case crimeCase = new Case();
         crimeCase.setCaseName("自杀");
@@ -33,11 +32,29 @@ public class CaseRepositoryTest {
         crimeConstitution.setSubjectiveElement("3333");
         crimeCase.setCrimeConstitution(crimeConstitution); //不用添加Id，由数据库自动生成
 
-        Case case1 =caseRepository.save(crimeCase);
+        Case case1 = caseRepository.save(crimeCase);
         Case targetCase = caseRepository.findById(case1.getCaseId()).get();
 
         assertThat("自杀").isEqualTo(targetCase.getCaseName());
-        assertEquals(crimeConstitution.getObjectiveElement(),targetCase.getCrimeConstitution().getObjectiveElement());
+        assertEquals(crimeConstitution.getObjectiveElement(), targetCase.getCrimeConstitution().getObjectiveElement());
     }
 
+    @Test
+    public void should_update_case() {
+
+        Case crimeCase = new Case();
+        crimeCase.setCaseName("自杀");
+        CrimeConstitution crimeConstitution = new CrimeConstitution();
+        crimeConstitution.setObjectiveElement("2222");
+        crimeConstitution.setSubjectiveElement("3333");
+        crimeCase.setCrimeConstitution(crimeConstitution);
+        Case case1 = caseRepository.save(crimeCase);
+        Case updateCase = caseRepository.findById(case1.getCaseId()).get();
+
+        updateCase.setCaseName("他杀");
+        updateCase.getCrimeConstitution().setObjectiveElement("4444");
+        Case targetCase = caseRepository.save(updateCase);
+        assertThat("他杀").isEqualTo(targetCase.getCaseName());
+        assertEquals("4444", targetCase.getCrimeConstitution().getObjectiveElement());
+    }
 }
