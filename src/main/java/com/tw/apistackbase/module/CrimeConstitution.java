@@ -13,7 +13,7 @@ public class CrimeConstitution {
     private String objectiveElement;
 
     @Column(nullable = false)
-    private long subjectiveElement;
+    private String subjectiveElement;
 
     public int getId() {
         return id;
@@ -31,11 +31,11 @@ public class CrimeConstitution {
         this.objectiveElement = objectiveElement;
     }
 
-    public long getSubjectiveElement() {
+    public String getSubjectiveElement() {
         return subjectiveElement;
     }
 
-    public void setSubjectiveElement(long subjectiveElement) {
+    public void setSubjectiveElement(String subjectiveElement) {
         this.subjectiveElement = subjectiveElement;
     }
 }

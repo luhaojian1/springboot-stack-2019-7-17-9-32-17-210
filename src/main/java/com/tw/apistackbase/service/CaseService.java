@@ -35,4 +35,8 @@ public class CaseService {
     public void deleteById(int caseId) {
         caseRepository.deleteById(caseId);
     }
+
+    public Case updateCase(Case crimeCase) {
+        return caseRepository.save(crimeCase);
+    }
 }

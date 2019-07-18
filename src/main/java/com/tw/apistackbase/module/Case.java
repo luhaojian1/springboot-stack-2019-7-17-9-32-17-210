@@ -12,13 +12,16 @@ public class Case {
     @Column(nullable = false)
     private String caseName;
 
-    @Column(nullable = false)
+    @Column(nullable = false )
     private long occurrenceTime;
 
-    @OneToOne
-    @JoinColumn(name = "case_id")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "crimeConstitution_id")
     private CrimeConstitution crimeConstitution;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "procuratorate_id")
+    private Procuratorate procuratorate;
 
     public int getCaseId() {
         return caseId;
@@ -50,5 +53,13 @@ public class Case {
 
     public void setCrimeConstitution(CrimeConstitution crimeConstitution) {
         this.crimeConstitution = crimeConstitution;
+    }
+
+    public Procuratorate getProcuratorate() {
+        return procuratorate;
+    }
+
+    public void setProcuratorate(Procuratorate procuratorate) {
+        this.procuratorate = procuratorate;
     }
 }

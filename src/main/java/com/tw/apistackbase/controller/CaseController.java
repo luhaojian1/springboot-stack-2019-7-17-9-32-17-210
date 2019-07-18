@@ -28,6 +28,13 @@ public class CaseController {
         return caseService.findById(caseId);
     }
 
+    @PutMapping("/cases/{caseId}")
+    public Case updateCase(@PathVariable int caseId,@RequestParam Case crimeCase){
+        crimeCase.setCaseId(caseId);
+        return caseService.updateCase(crimeCase);
+    }
+
+
     @GetMapping(value = "/cases",params = "caseName")
     public List<Case> findByCaseName(@RequestParam String caseName){
         return caseService.findByCaseName(caseName);
