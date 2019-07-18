@@ -11,6 +11,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 @DataJpaTest
 @ExtendWith(SpringExtension.class)
@@ -55,4 +56,23 @@ public class CaseRepositoryTest {
         assertThat("他杀").isEqualTo(targetCase.getCaseName());
         assertEquals("4444", targetCase.getCrimeConstitution().getObjectiveElement());
     }
+
+    @Test
+    public void should_delete_case_by_id() {
+
+        Case crimeCase = new Case();
+        crimeCase.setCaseName("自杀");
+        CrimeConstitution crimeConstitution = new CrimeConstitution();
+        crimeConstitution.setObjectiveElement("2222");
+        crimeConstitution.setSubjectiveElement("3333");
+        crimeCase.setCrimeConstitution(crimeConstitution);
+        Case case1 = caseRepository.save(crimeCase);
+
+        caseRepository.deleteById(case1.getCaseId());
+        Case targetCase = caseRepository.findById(case1.getCaseId()).orElse(null);
+
+        assertNull(targetCase);
+    }
+
+
 }
