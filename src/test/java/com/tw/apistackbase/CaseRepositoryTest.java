@@ -3,7 +3,6 @@ package com.tw.apistackbase;
 import com.tw.apistackbase.module.Case;
 import com.tw.apistackbase.module.CrimeConstitution;
 import com.tw.apistackbase.repository.CaseRepository;
-import com.tw.apistackbase.repository.CrimeConstitutionRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +18,7 @@ public class CaseRepositoryTest {
 
     @Autowired
     private CaseRepository caseRepository;
-    @Autowired
-    private CrimeConstitutionRepository crimeConstitutionRepository;
+
 
     @Test
     public void should_save_and_find_case() {
