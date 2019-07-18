@@ -9,4 +9,6 @@ public interface CaseRepository extends JpaRepository<Case, Integer> {
 
     public List<Case> findByCaseName(String caseName);
 
+    public List<Case> findAllByOrderByOccurrenceTimeDesc();
+
 }

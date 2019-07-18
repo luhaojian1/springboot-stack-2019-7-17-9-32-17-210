@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.util.List;
+
 import static org.assertj.core.api.Java6Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -72,6 +74,55 @@ public class CaseRepositoryTest {
         Case targetCase = caseRepository.findById(case1.getCaseId()).orElse(null);
 
         assertNull(targetCase);
+    }
+
+    @Test
+    public void should_find_cases_by_caseName() {
+
+        Case crimeCase = new Case();
+        crimeCase.setCaseName("自杀");
+        CrimeConstitution crimeConstitution = new CrimeConstitution();
+        crimeConstitution.setObjectiveElement("2222");
+        crimeConstitution.setSubjectiveElement("3333");
+        crimeCase.setCrimeConstitution(crimeConstitution);
+        caseRepository.save(crimeCase);
+
+        Case crimeCase1 = new Case();
+        crimeCase1.setCaseName("自杀");
+        CrimeConstitution crimeConstitution1 = new CrimeConstitution();
+        crimeConstitution1.setObjectiveElement("2222");
+        crimeConstitution1.setSubjectiveElement("4444");
+        crimeCase1.setOccurrenceTime(System.currentTimeMillis());
+        crimeCase1.setCrimeConstitution(crimeConstitution1);
+        caseRepository.save(crimeCase1);
+
+        List<Case> cases = caseRepository.findByCaseName("自杀");
+        assertEquals(cases.size(), 2);
+    }
+
+    @Test
+    public void should_get_cases_list_order_by_time() {
+        Case crimeCase = new Case();
+        crimeCase.setCaseName("自杀");
+        CrimeConstitution crimeConstitution = new CrimeConstitution();
+        crimeConstitution.setObjectiveElement("2222");
+        crimeConstitution.setSubjectiveElement("3333");
+        crimeCase.setOccurrenceTime(System.currentTimeMillis());
+        crimeCase.setCrimeConstitution(crimeConstitution);
+        caseRepository.save(crimeCase);
+
+        Case crimeCase1 = new Case();
+        crimeCase1.setCaseName("他杀");
+        CrimeConstitution crimeConstitution1 = new CrimeConstitution();
+        crimeConstitution1.setObjectiveElement("2222");
+        crimeConstitution1.setSubjectiveElement("3333");
+        crimeCase1.setOccurrenceTime(System.currentTimeMillis());
+        crimeCase1.setCrimeConstitution(crimeConstitution1);
+        caseRepository.save(crimeCase1);
+
+        List<Case> cases = caseRepository.findAllByOrderByOccurrenceTimeDesc();
+        assertEquals("他杀", cases.get(0).getCaseName());
+        assertEquals("自杀", cases.get(1).getCaseName());
     }
 
 
