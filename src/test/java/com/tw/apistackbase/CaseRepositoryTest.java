@@ -2,11 +2,13 @@ package com.tw.apistackbase;
 
 import com.tw.apistackbase.module.Case;
 import com.tw.apistackbase.module.CrimeConstitution;
+import com.tw.apistackbase.module.Procuratorate;
 import com.tw.apistackbase.repository.CaseRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
@@ -17,6 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 @DataJpaTest
 @ExtendWith(SpringExtension.class)
+@TestPropertySource(locations = "classpath:application-test.yml")
 public class CaseRepositoryTest {
 
     @Autowired
@@ -32,6 +35,10 @@ public class CaseRepositoryTest {
         crimeConstitution.setObjectiveElement("2222");
         crimeConstitution.setSubjectiveElement("3333");
         crimeCase.setCrimeConstitution(crimeConstitution); //不用添加Id，由数据库自动生成
+
+        Procuratorate procuratorate = new Procuratorate();
+        procuratorate.setName("检察院1");
+
 
         Case case1 = caseRepository.save(crimeCase);
         Case targetCase = caseRepository.findById(case1.getCaseId()).get();

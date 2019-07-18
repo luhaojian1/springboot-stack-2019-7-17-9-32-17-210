@@ -7,13 +7,14 @@ import java.util.List;
 @Table(name = "procuratorate")
 public class Procuratorate {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     @Column(unique = true, nullable = false, length = 50)
     private String name;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "procuratorId")
+    @JoinColumn(name = "procuratorate_id")
     private List<Procurator> procurators;
 
     public int getId() {
